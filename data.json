@@ -1,0 +1,13 @@
+{
+  "instructors": [
+    {
+      "id": 1,
+      "avatar_url": "https://br.web.img3.acsta.net/pictures/15/07/20/18/14/582462.jpg",
+      "name": "Teste",
+      "birth": -623030400000,
+      "gender": "M",
+      "services": "Natação, Esportes",
+      "criado": 1585669804234
+    }
+  ]
+}

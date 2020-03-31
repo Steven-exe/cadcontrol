@@ -1,0 +1,45 @@
+{% extends "layout.njk" %}
+
+{% block head %}
+<title>Instrutores</title>
+{% endblock head %}
+
+
+{% block conteudo %}
+<div class="card">
+    <section class="avatar" style="background: url({{instructors.avatar_url}}) no-repeat center center/ cover"></section>
+    <section class="details">
+        <h3>Detalhes</h3>
+
+        <div class="item">
+            <div>Instrutor</div>
+            <div>{{instructors.name}}</div>
+        </div>
+
+        <div class="item">
+            <div>Idade</div>
+            <div>{{instructors.birth}}</div>
+        </div>
+
+        <div class="item">
+            <div>Sexo</div>
+            <div>{{"Masculino" if instructors.gender == "M" else "Feminino"}}</div>
+        </div>
+
+        <div class="item">
+            <div>Acompanhamento</div>
+            <div>
+                {% for service in instructors.services %}
+                <span>{{service}}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="item">
+            <div>Desde</div>
+            <div>{{instructors.criado}}</div>
+        </div>
+
+    </section>
+</div>
+{% endblock conteudo %}
