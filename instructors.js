@@ -1,5 +1,6 @@
 const fs = require('fs')
 const data = require("./data.json")
+const {age} = require("./utils")
 
 exports.show = function(req, res){
 
@@ -11,29 +12,15 @@ exports.show = function(req, res){
 
     if (!foundinstruc) return res.send("Instructor not Found!")
 
-    function age(timestamp){
-        const today = new Date()
-        const birthDate = new Date(timestamp)
-
-        let age = today.getFullYear() - birthDate.getFullYear()
-        const month = today.getMonth() - birthDate.getMonth()
-
-        if (month < 0 || month == 0 && today.getDate() <= birthDate.getDate()){
-            age = age - 1
-        }
-        console.log(age)
-        return age
-
-    }
-
-    const instruc = {
+    let teste = new Intl.DateTimeFormat('pt-BR').format(foundinstruc.criado)
+    const instructors = {
         ...foundinstruc,
         age: age(foundinstruc.birth),
         services: foundinstruc.services.split(","),
-        created_at: ""
+        created: teste,
     }
 
-    res.render("instructors/show", {instructors: instruc})
+    return res.render("instructors/show", {instructors})
 }
 // create
 exports.post = function(req, res) {
