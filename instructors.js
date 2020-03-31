@@ -11,11 +11,26 @@ exports.show = function(req, res){
 
     if (!foundinstruc) return res.send("Instructor not Found!")
 
+    function age(timestamp){
+        const today = new Date()
+        const birthDate = new Date(timestamp)
+
+        let age = today.getFullYear() - birthDate.getFullYear()
+        const month = today.getMonth() - birthDate.getMonth()
+
+        if (month < 0 || month == 0 && today.getDate() <= birthDate.getDate()){
+            age = age - 1
+        }
+        console.log(age)
+        return age
+
+    }
+
     const instruc = {
         ...foundinstruc,
-        age: "",
+        age: age(foundinstruc.birth),
         services: foundinstruc.services.split(","),
-        created_at: "",
+        created_at: ""
     }
 
     res.render("instructors/show", {instructors: instruc})
@@ -23,7 +38,8 @@ exports.show = function(req, res){
 // create
 exports.post = function(req, res) {
         const keys = Object.keys(req.body)
-    
+        console.log(req.body)
+
         for (key of keys){
             if (req.body[key] == ""){
                 return res.send("Please, fill all the fields")
@@ -36,8 +52,6 @@ exports.post = function(req, res) {
         const criado= Date.now();
         const id = Number(data.instructors.length + 1)
 
-
-        
         data.instructors.push({
             id,
             avatar_url,
